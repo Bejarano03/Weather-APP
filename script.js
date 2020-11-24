@@ -1,0 +1,21 @@
+var APIKey = "";
+var city= "";
+var currentDate = "";
+var tempF = "";
+var humityValue = "";
+var windSpeed = "";
+var uvIndexValue = "";
+var latitude = "";
+var longitude = "";
+var minTempK = "";
+var maxTempK = "";
+var minTempF = "";
+var maxTempF = "";
+var dayhumitidy = "";
+var currentWeatherIconCode = "";
+var currentWeatherIconUrl = "";
+var iconcode = "";
+var iconurl = "";
+var country = "";
+
+var listOfSearchedCities = [];
