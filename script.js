@@ -40,4 +40,12 @@ $("#search-btn").on("click", function() {
     clearDisplayedWeatherInfo()
     resetGlobalVariables()
     var cityName = $("input").val().toUpperCase().trim();
-}
+    $("#search-input").val("");
+    searchCity(cityName);
+
+    if (cityName !== ""&& listOfSearchedCities[0] !== cityName) {
+        listOfSearchedCities.unshift(cityName);
+        localStorage.setItem("searched-cities", JSON.stringify(listOfSearchedCities));
+        if (listOfSearchedCities.length ===1) 
+    }
+});
