@@ -1,29 +1,12 @@
 var APIKey = "45cd964728f300c81057241ce6ee826d";
-var city= "";
-var currentDate = "";
-var tempF = "";
-var humityValue = "";
-var windSpeed = "";
-var uvIndexValue = "";
-var latitude = "";
-var longitude = "";
-var minTempK = "";
-var maxTempK = "";
-var minTempF = "";
-var maxTempF = "";
-var dayhumitidy = "";
-var currentWeatherIconCode = "";
-var currentWeatherIconUrl = "";
-var iconcode = "";
-var iconurl = "";
-var country = "";
+
 
 var listOfSearchedCities = [];
 
 // Creating variable...
 var getSearchedCitiesFromLS = JSON.parse(localStorage.getItem("searched-cities"));
 if (getSearchedCitiesFromLS !== null) {
-    getSearchedCitiesFromLS.forEach(function(cit y) {city.toUpperCase();});
+    getSearchedCitiesFromLS.forEach(function(city) {city.toUpperCase();});
     listOfSearchedCities = getSearchedCitiesFromLS;
 }
 
@@ -46,6 +29,18 @@ $("#search-btn").on("click", function() {
     if (cityName !== ""&& listOfSearchedCities[0] !== cityName) {
         listOfSearchedCities.unshift(cityName);
         localStorage.setItem("searched-cities", JSON.stringify(listOfSearchedCities));
-        if (listOfSearchedCities.length ===1) 
-    }
+     if (listOfSearchedCities.length ===1) 
+    
+    
 });
+
+function getWeather (cityName) {
+    var queryURL = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(response) {
+        console.log(this);
+    }
+}
