@@ -141,3 +141,8 @@ function forecast(city) {
         }    
     })
 };
+
+// Calling the function
+searchCity(localStorage.getItem("locations").split(",")[localStorage.getItem("locations").split(",").length-1]);
+returnHistory();
+forecast(localStorage.getItem("locations").split(",")[localStorage.getItem("locations").split(",").length-1]);
