@@ -92,3 +92,52 @@ function fToC(fahrenheit) {
     const temp = `${fTemp}\xB0F : ${fToCel}\xB0C.`;
     return temp;   
 };
+
+// Searched City Weather and 5 day forcast
+function forecast(city) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=3d16044a2eba4d271046d70fd1f2c155";
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(forecastResponse){
+        let filteredDays = forecastResponse.list.filter(
+            function (currentElement){
+            return currentElement.dt_txt.includes("12:00:00")
+            }	
+        );
+        $("#forecast").empty();
+        for(let i = 0; i < filteredDays.length; i++ ){
+             
+            // Data from filteredDays
+            let date = filteredDays[i].dt_txt.split(" ")[0];
+            let icon = filteredDays[i].weather[0].icon;
+            let humidity = filteredDays[i].main.humidity;
+            
+            // Creating and adding classes and attributes to html elements.
+            let square = $("<div>").attr("class","square");
+            let section = $("<section>").attr("class","content").attr("class", "col-sm-3");
+            let list = $("<ul>");
+            let listElDates = $("<li>").attr("class","dates").attr("class", "nowrap").text(date);
+            let listIcon = $("<ul>").append($("<img>").addClass("weatherImg").attr("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png"));
+            
+            // Declaring the function F to C
+            let cTemp = fToC(filteredDays[i].main.temp);
+            let tempT = cTemp;
+            
+            // Structuring the html elements
+            let listElTempF = $("<li>").attr("class", "tempForecast").attr("class", "nowrap").text("Temp: " + tempT);
+            let listElHumidityF = $("<li>").attr("class", "humidityForecast").attr("class", "nowrap").text("Humidity: " + humidity);
+           
+            // F to C
+            function fToC(fahrenheit) {
+                const fTemp = Math.round(fahrenheit);
+                const fToCel = Math.round((fTemp - 32) * 5 / 9);
+                const temp = `${fTemp}\xB0F : ${fToCel}\xB0C.`;
+                return temp;    
+            }
+            // Append all the data together
+            square.append(section.append(list.append(listElDates,listIcon,listElTempF,listElHumidityF)))
+             $("#forecast").append(square)
+        }    
+    })
+};
