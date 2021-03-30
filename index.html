@@ -25,5 +25,42 @@
                     <div id="history"></div>
                 </form>
             </div>
+
+                <!-- Main container for the search results -->
+                <div class="col-xs-8">
+                    <div class="row" id="main">
+                        <div class="col-xs-8">
+                            <!-- returned information & weather for the city -->
+                            <table id="resultsWeather">
+                                <tr>
+                                    <td id="cityName"></td>
+                                    <td id="currentDate"></td>
+                                </tr>
+                                <tr>
+                                    <td id="temperature"></td>
+                                <tr>
+                                    <td id="humidity"></td>
+                                </tr>
+                                <tr>
+                                    <td id="windSpeed"></td>
+                                <tr>
+                                </tr>
+                                <td id="uvIndex"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 5 day forecast results -->
+                    <h2>5 Day Forecast:</h2>
+                    <div class="row" id="forecast">
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+                <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="./script.js"></script>
 </body>
 </html>
