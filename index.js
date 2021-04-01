@@ -4,26 +4,35 @@ var searchInput = $("#city")
 var cityName = $("#city-name");
 var currentTemp = $("#current-temp");
 
-// This creates my date variable
-var today = new Date();
-let dd = String(today.getDate()).padStart(2, '0');
-let mm = String(today.getMonth() + 1).padStart(2, '0');
-let yyyy = today.getFullYear();
-var today = mm + '/' + dd + '/' + yyyy;
-
 searchBtn.on("click", function(e){
     e.preventDefault();
     if (searchInput.val() === "") {
         alert("Please nter a city")
         return;
-    }
+    } console.log("clicked button")
+    getWeather(searchInput.val());
 });
 
-function weatherData( cityName, currentTemp){
-    cityName.text(cityName),
-    currentTemp.text(`Temperature: ${cityTemp} F`);
+
+function displayCurrentWeather(){
+    var cardDiv = $("<div class='card-body'>")
+    var currenTemp = $("<p>")
+
+    cardDiv.append(currentTemp)
 }
 
 function getWeather(cityInput) {
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&APPID=${apiKey}&units=imperial`;
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }). then(function(weatherInfo){
+        var cityObject = {
+            cityTemp: weatherInfo.main.temp
+        }. then(weatherData(cityObject.cityTemp))
+    })
 }
+
+getWeather();
+
