@@ -18,8 +18,11 @@ $(document).on("click", function() {
 
 function displayCurrentWeather(){
     var cardDiv = $("<div class='container border bg-light'>");
-    
+    var header = $("<h3>").text(city + " " + date.toString());
+    var image = $("<img>").attr("src", weatherIconUrl);
+    header.append(image);
     var temperature = $("<p>").text("Temperature: " + temp+ " ºF");
+    cardDiv.append(header);
     cardDiv.append(temperature);
     $("#current-weather").append(cardDiv)
 }
@@ -34,8 +37,12 @@ function getWeather(cityName) {
     }).then(function(response) {
         var result = response;
         console.log(result);
+        city = result.name.trim();
+        date = moment.unix(result.dt).format("l");        
         var tempK = result.main.temp;
         temp = ((tempK - 273.15) * 1.80 + 32).toFixed(1);
+        weatherIcon = result.weather[0].icon;
+        weatherIconUrl = "https://openweathermap.org/img/w/" + weatherIcon + ".png";
 
         displayCurrentWeather()
 })
