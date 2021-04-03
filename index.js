@@ -1,16 +1,18 @@
 var apiKey = "45cd964728f300c81057241ce6ee826d";
 var searchBtn = $("#search-btn");
 var searchInput = $("#city")
-var cityName = $("#city-name");
-var currentTemp = $("#current-temp");
+
 
 searchBtn.on("click", function(e){
     e.preventDefault();
-    if (searchInput.val() === "") {
-        alert("Please nter a city")
-        return;
-    } console.log("clicked button")
-    getWeather(searchInput.val());
+    var cityName = $("input").val().toUpperCase().trim();
+    searchInput.val("");
+    getWeather(cityName); 
+});
+
+$(document).on("click", function() {
+    var cityName = $(this).text();
+    getWeather(cityName);
 });
 
 
@@ -21,18 +23,15 @@ function displayCurrentWeather(){
     cardDiv.append(currentTemp)
 }
 
-function getWeather(cityInput) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&APPID=${apiKey}&units=imperial`;
+function getWeather(cityName) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + 
+    cityName + "&appid=" + apiKey;
 
     $.ajax({
         url: queryURL,
         method: "GET"
-    }). then(function(weatherInfo){
-        var cityObject = {
-            cityTemp: weatherInfo.main.temp
-        }. then(weatherData(cityObject.cityTemp))
-    })
-}
-
-getWeather();
-
+    }).then(function(response) {
+        var result = response;
+        console.log(result);
+})
+};
